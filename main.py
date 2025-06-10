@@ -57,8 +57,17 @@ while not game_over:
         while [apple_x, apple_y] in snake:
             apple_x = rd.randint(1, 11) * 40
             apple_y = rd.randint(1, 11) * 40
-
-
+    if x < 0 or x >= 800 or y < 0 or y >= 480:
+        game_over = True
+        message = font.render("Ты проиграл", True, (255, 255, 255))
+        disp.blit(message, [300, 0])
+        pg.display.update()
+        break
+    if len(snake) > 4 and snake[-1] in snake[:-1]:
+        game_over = True
+        message = font.render("Ты проиграл", True, (255, 255, 255))
+        disp.blit(message, [300, 0])
+        pg.display.update()
     disp.fill(black)
     for i in range(len(snake)):
         pg.draw.rect(disp, green, [snake[i][0], snake[i][1], 40,40])
